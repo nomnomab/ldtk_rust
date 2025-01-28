@@ -19,7 +19,7 @@ use std::collections::HashMap;
 /// This is the root of any Project JSON file. It contains:  - the project settings, - an
 /// array of levels, - a group of definitions (that can probably be safely ignored for most
 /// users).
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Project {
     /// This object is not actually used by LDtk. It ONLY exists to force explicit references to
@@ -141,7 +141,7 @@ pub struct Project {
     pub worlds: Vec<World>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct LdtkCustomCommand {
     pub command: String,
     /// Possible values: `Manual`, `AfterLoad`, `BeforeSave`, `AfterSave`
@@ -149,7 +149,7 @@ pub struct LdtkCustomCommand {
 }
 
 /// Possible values: `Manual`, `AfterLoad`, `BeforeSave`, `AfterSave`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum When {
     #[serde(rename = "AfterLoad")]
     AfterLoad,
@@ -168,7 +168,7 @@ pub enum When {
 /// **Tilesets** and **Enums**.
 ///
 /// A structure containing all the definitions of this project
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Definitions {
     /// All entities definitions, including their custom fields
@@ -186,7 +186,7 @@ pub struct Definitions {
     pub tilesets: Vec<TilesetDefinition>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct EntityDefinition {
     /// If enabled, this entity is allowed to stay outside of the current level bounds
@@ -265,7 +265,7 @@ pub struct EntityDefinition {
 
 /// This section is mostly only intended for the LDtk editor app itself. You can safely
 /// ignore it.
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FieldDefinition {
     /// Human readable value type. Possible values: `Int, Float, String, Bool, Color,
@@ -347,7 +347,7 @@ pub struct FieldDefinition {
 }
 
 /// Possible values: `Any`, `OnlySame`, `OnlyTags`, `OnlySpecificEntity`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum AllowedRefs {
     Any,
     #[serde(rename = "OnlySame")]
@@ -362,7 +362,7 @@ pub enum AllowedRefs {
 /// `Points`, `PointStar`, `PointPath`, `PointPathLoop`, `RadiusPx`, `RadiusGrid`,
 /// `ArrayCountWithLabel`, `ArrayCountNoLabel`, `RefLinkBetweenPivots`,
 /// `RefLinkBetweenCenters`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum EditorDisplayMode {
     #[serde(rename = "ArrayCountNoLabel")]
     ArrayCountNoLabel,
@@ -395,7 +395,7 @@ pub enum EditorDisplayMode {
 }
 
 /// Possible values: `Above`, `Center`, `Beneath`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum EditorDisplayPos {
     Above,
     Beneath,
@@ -403,7 +403,7 @@ pub enum EditorDisplayPos {
 }
 
 /// Possible values: `ZigZag`, `StraightArrow`, `CurvedArrow`, `ArrowsLine`, `DashedLine`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum EditorLinkStyle {
     #[serde(rename = "ArrowsLine")]
     ArrowsLine,
@@ -417,7 +417,7 @@ pub enum EditorLinkStyle {
     ZigZag,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum TextLanguageMode {
     #[serde(rename = "LangC")]
     LangC,
@@ -442,7 +442,7 @@ pub enum TextLanguageMode {
 }
 
 /// Possible values: `DiscardOldOnes`, `PreventAdding`, `MoveLastOne`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum LimitBehavior {
     #[serde(rename = "DiscardOldOnes")]
     DiscardOldOnes,
@@ -454,7 +454,7 @@ pub enum LimitBehavior {
 
 /// If TRUE, the maxCount is a "per world" limit, if FALSE, it's a "per level". Possible
 /// values: `PerLayer`, `PerLevel`, `PerWorld`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum LimitScope {
     #[serde(rename = "PerLayer")]
     PerLayer,
@@ -465,7 +465,7 @@ pub enum LimitScope {
 }
 
 /// Possible values: `Rectangle`, `Ellipse`, `Tile`, `Cross`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum RenderMode {
     Cross,
     Ellipse,
@@ -474,7 +474,7 @@ pub enum RenderMode {
 }
 
 /// This object represents a custom sub rectangle in a Tileset image.
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TilesetRectangle {
     /// Height in pixels
@@ -492,7 +492,7 @@ pub struct TilesetRectangle {
 /// An enum describing how the the Entity tile is rendered inside the Entity bounds. Possible
 /// values: `Cover`, `FitInside`, `Repeat`, `Stretch`, `FullSizeCropped`,
 /// `FullSizeUncropped`, `NineSlice`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum TileRenderMode {
     Cover,
     #[serde(rename = "FitInside")]
@@ -507,7 +507,7 @@ pub enum TileRenderMode {
     Stretch,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct EnumDefinition {
     pub external_file_checksum: Option<String>,
@@ -525,7 +525,7 @@ pub struct EnumDefinition {
     pub values: Vec<EnumValueDefinition>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct EnumValueDefinition {
     /// **WARNING**: this deprecated value is no longer exported since version 1.4.0  Replaced
@@ -543,7 +543,7 @@ pub struct EnumValueDefinition {
     pub tile_rect: Option<TilesetRectangle>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LayerDefinition {
     /// Type of the layer (*IntGrid, Entities, Tiles or AutoLayer*)
@@ -628,7 +628,7 @@ pub struct LayerDefinition {
     pub use_async_render: bool,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AutoLayerRuleGroup {
     pub active: bool,
@@ -648,7 +648,7 @@ pub struct AutoLayerRuleGroup {
 /// This complex section isn't meant to be used by game devs at all, as these rules are
 /// completely resolved internally by the editor before any saving. You should just ignore
 /// this part.
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AutoLayerRuleDefinition {
     /// If FALSE, the rule effect isn't applied, and no tiles are generated.
@@ -714,7 +714,7 @@ pub struct AutoLayerRuleDefinition {
 }
 
 /// Checker mode Possible values: `None`, `Horizontal`, `Vertical`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Checker {
     Horizontal,
     None,
@@ -722,14 +722,14 @@ pub enum Checker {
 }
 
 /// Defines how tileIds array is used Possible values: `Single`, `Stamp`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum TileMode {
     Single,
     Stamp,
 }
 
 /// IntGrid value definition
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IntGridValueDefinition {
     pub color: String,
@@ -743,7 +743,7 @@ pub struct IntGridValueDefinition {
 }
 
 /// IntGrid value group definition
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct IntGridValueGroupDefinition {
     /// User defined color
     pub color: Option<String>,
@@ -755,7 +755,7 @@ pub struct IntGridValueGroupDefinition {
 
 /// Type of the layer as Haxe Enum Possible values: `IntGrid`, `Entities`, `Tiles`,
 /// `AutoLayer`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Type {
     #[serde(rename = "AutoLayer")]
     AutoLayer,
@@ -768,7 +768,7 @@ pub enum Type {
 /// The `Tileset` definition is the most important part among project definitions. It
 /// contains some extra informations about each integrated tileset. If you only had to parse
 /// one definition section, that would be the one.
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TilesetDefinition {
     /// Grid-based height
@@ -813,28 +813,28 @@ pub struct TilesetDefinition {
 }
 
 /// In a tileset definition, user defined meta-data of a tile.
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TileCustomMetadata {
     pub data: String,
     pub tile_id: i64,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum EmbedAtlas {
     #[serde(rename = "LdtkIcons")]
     LdtkIcons,
 }
 
 /// In a tileset definition, enum based tag infos
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct EnumTagValue {
     pub enum_value_id: String,
     pub tile_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Flag {
     #[serde(rename = "DiscardPreCsvIntGrid")]
     DiscardPreCsvIntGrid,
@@ -855,7 +855,7 @@ pub enum Flag {
 /// This object is not actually used by LDtk. It ONLY exists to force explicit references to
 /// all types, to make sure QuickType finds them and integrate all of them. Otherwise,
 /// Quicktype will drop types that are not explicitely used.
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct ForcedRefs {
     pub auto_layer_rule_group: Option<AutoLayerRuleGroup>,
@@ -888,7 +888,7 @@ pub struct ForcedRefs {
     pub world: Option<World>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct EntityInstance {
     /// Grid-based coordinates (`[x,y]` format)
@@ -934,7 +934,7 @@ pub struct EntityInstance {
     pub width: i64,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FieldInstance {
     /// Field definition identifier
@@ -969,7 +969,7 @@ pub struct FieldInstance {
 /// This object describes the "location" of an Entity instance in the project worlds.
 ///
 /// IID information of this instance
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ReferenceToAnEntityInstance {
     /// IID of the refered EntityInstance
@@ -983,7 +983,7 @@ pub struct ReferenceToAnEntityInstance {
 }
 
 /// This object is just a grid-based coordinate used in Field values.
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct GridPoint {
     /// X grid-based coordinate
     pub cx: i64,
@@ -992,7 +992,7 @@ pub struct GridPoint {
 }
 
 /// IntGrid value instance
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IntGridValueInstance {
     /// Coordinate ID in the layer grid
@@ -1001,7 +1001,7 @@ pub struct IntGridValueInstance {
     pub v: i64,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LayerInstance {
     /// Grid-based height
@@ -1075,7 +1075,7 @@ pub struct LayerInstance {
 }
 
 /// This structure represents a single tile from a given Tileset.
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct TileInstance {
     /// Alpha/opacity of the tile (0-1, defaults to 1)
     pub a: f64,
@@ -1103,7 +1103,7 @@ pub struct TileInstance {
 /// except heavy sections, like the `layerInstances` array (which will be null). The
 /// `externalRelPath` string points to the `ldtkl` file.  A `ldtkl` file is just a JSON file
 /// containing exactly what is described below.
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Level {
     /// Background color of the level (same as `bgColor`, except the default value is
@@ -1176,7 +1176,7 @@ pub struct Level {
 }
 
 /// Level background image position info
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LevelBackgroundPosition {
     /// An array of 4 float values describing the cropped sub-rectangle of the displayed
@@ -1191,7 +1191,7 @@ pub struct LevelBackgroundPosition {
     pub top_left_px: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum BgPos {
     Contain,
     Cover,
@@ -1202,7 +1202,7 @@ pub enum BgPos {
 }
 
 /// Nearby level info
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct NeighbourLevel {
     /// A lowercase string tipping on the level location (`n`orth, `s`outh, `w`est,
@@ -1218,7 +1218,7 @@ pub struct NeighbourLevel {
     pub level_uid: Option<i64>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LdtkTableOfContentEntry {
     pub identifier: String,
@@ -1228,7 +1228,7 @@ pub struct LdtkTableOfContentEntry {
     pub instances_data: Vec<LdtkTocInstanceData>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LdtkTocInstanceData {
     /// An object containing the values of all entity fields with the `exportToToc` option
@@ -1245,7 +1245,7 @@ pub struct LdtkTocInstanceData {
 /// **IMPORTANT**: this type is available as a preview. You can rely on it to update your
 /// importers, for when it will be officially available.  A World contains multiple levels,
 /// and it has its own layout settings.
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct World {
     /// Default new level height
@@ -1269,7 +1269,7 @@ pub struct World {
     pub world_layout: Option<WorldLayout>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum WorldLayout {
     Free,
     #[serde(rename = "GridVania")]
@@ -1282,7 +1282,7 @@ pub enum WorldLayout {
 
 /// Naming convention for Identifiers (first-letter uppercase, full uppercase etc.) Possible
 /// values: `Capitalize`, `Uppercase`, `Lowercase`, `Free`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum IdentifierStyle {
     Capitalize,
     Free,
@@ -1292,7 +1292,7 @@ pub enum IdentifierStyle {
 
 /// "Image export" option when saving project. Possible values: `None`, `OneImagePerLayer`,
 /// `OneImagePerLevel`, `LayersAndLevels`
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum ImageExportMode {
     #[serde(rename = "LayersAndLevels")]
     LayersAndLevels,
